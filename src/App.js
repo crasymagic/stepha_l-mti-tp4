@@ -5,7 +5,7 @@ import store from './store';
 
 const Root = () => (
   <Provider store={store}>
-    <Game />
+    <Game/>
   </Provider>
 );
 
