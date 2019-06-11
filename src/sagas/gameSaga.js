@@ -1,9 +1,13 @@
 import { take, put } from 'redux-saga/effects';
+import { gameStart, gameStartRequested } from '../actions/game';
 
-function* gameSaga() {
+export function* gameSaga() {
     while (true) {
-        yield take(['GAME_START_REQUESTED']);
-        yield put({ type: 'GAME_START' });
+        yield take(gameStartRequested());
+        yield put(gameStart());
     }
 }
- export default gameSaga;
+
+export function* targetClickedSaga() {
+    yield take('TARGET_CLICKED_REQUESTED');
+}

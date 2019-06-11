@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Target = ({ x = 0, y = 0, value = 0, onClick = () => {} }) => (
+const Target = ({ x = 0, y = 0, timeout = 0, onClick = () => {} }) => (
   <div
     style={{
       position: 'absolute',
@@ -16,7 +16,7 @@ const Target = ({ x = 0, y = 0, value = 0, onClick = () => {} }) => (
     }}
     onClick={onClick}
   >
-    {value}
+    {timeout}
   </div>
 );
 

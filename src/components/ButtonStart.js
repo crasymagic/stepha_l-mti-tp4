@@ -17,11 +17,12 @@ const ButtonStart = ({ onClick = () => {} }) => (
       lineHeight: '100px',
       cursor: 'pointer',
       backgroundColor: '#4BE072',
-      color: '#21222C'
+      color: '#21222C',
+      borderRadius: '8px'
     }}
     onClick={onClick}
   >
-    START !
+    <span>START !</span>
   </div>
 );
 

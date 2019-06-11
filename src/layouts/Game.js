@@ -3,15 +3,17 @@ import { connect } from 'react-redux';
 import Target from '../components/Target';
 import Info from '../components/Info';
 import ButtonStart from '../components/ButtonStart';
+import { deleteTarget } from '../actions/targets';
 
 // FIXME: maybe, do something about this ?
 const mapStateToProps = state => ({
   lives: state.game.lives,
   score: state.game.score,
-  isStarted: state.game.isStarted
+  isStarted: state.game.isStarted, 
+  targets: state.game.targets
 });
 
-const GameLayout = ({ isStarted, lives, score, dispatch }) => (
+const GameLayout = ({ isStarted, lives, score, targets, dispatch }) => (
   <div
     style={{
       position: 'fixed',
@@ -28,7 +30,18 @@ const GameLayout = ({ isStarted, lives, score, dispatch }) => (
     {isStarted ? (
       <React.Fragment>
         <Info lives={lives} score={score} />
-        <Target x={Math.floor(Math.random() * window.innerWidth) + 1} y={Math.floor(Math.random() * window.innerHeight) + 1} value={2} />
+        {
+          targets.map((target) => {
+            return (
+              <Target
+                key={target.id}
+                {...target}
+                onClick={() => dispatch(deleteTarget(target.id))}
+              />
+            );
+          })
+          
+        }
       </React.Fragment>
     ) : (
       <React.Fragment>
