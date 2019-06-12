@@ -1,11 +1,11 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import Game from './layouts/Game';
+import GameLayout from './layouts/Game';
 import store from './store';
 
 const Root = () => (
   <Provider store={store}>
-    <Game/>
+    <GameLayout/>
   </Provider>
 );
 

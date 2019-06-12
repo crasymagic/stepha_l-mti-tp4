@@ -67,4 +67,4 @@ const targets = (state = defaultTargetsState, action) => {
     }
 }
 
-export default combineReducers({targets});
+export default targets;
