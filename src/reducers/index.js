@@ -5,14 +5,7 @@ const defaultState = {
     score: 0,
     isStarted: false,
     isLost: false,
-    targets: [{
-        id: 0,
-        timeout: 5,
-        location: {
-            x: Math.floor(Math.random() * (window.innerWidth - 50)) + 50,
-            y: Math.floor(Math.random() * (window.innerHeight - 50)) + 50
-        }
-    }]
+    targets: []
 };
 
 export const game = (state = defaultState, action) => {

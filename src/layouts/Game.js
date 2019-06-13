@@ -8,20 +8,19 @@ import Lost from '../components/Lost';
 import { deleteTargetRequested } from '../actions/targets';
 import { gameStartRequested, gameStopRequested } from '../actions/game';
 
-// FIXME: maybe, do something about this ?
-  const mapStateToProps = state => {
-    console.log(state);
-    return {
-      lives: state.targets.lives,
-      score: state.targets.score,
-      isStarted: state.game.isStarted,
-      isLost: state.targets.isLost, 
-      targets: state.targets.targets
-    }
+const mapStateToProps = state => {
+  return {
+    lives: state.targets.lives,
+    score: state.targets.score,
+    isStarted: state.game.isStarted,
+    isLost: state.targets.isLost, 
+    targets: state.targets.targets
+  }
 };
 
 const GameLayout = ({ isStarted, isLost, lives, score, targets, dispatch }) => (
   <div
+    id="gamecanvas"
     style={{
       position: 'fixed',
       backgroundColor: '#21222C',
@@ -43,6 +42,7 @@ const GameLayout = ({ isStarted, isLost, lives, score, targets, dispatch }) => (
             return (
               <Target
                 key={index}
+                id={index}
                 {...target}
                 onDeleteTarget={() => dispatch(deleteTargetRequested(target.id))}
               />
