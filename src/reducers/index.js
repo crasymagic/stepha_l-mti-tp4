@@ -56,7 +56,7 @@ export const targets = (state = defaultState, action) => {
                 }
             );
         case 'DELETE_TARGET':
-            console.log('DELETE_TARGET');
+            console.log('DELETE_TARGET', state, action);
             return Object.assign({},
                 state, {
                     score: state.score + 1,
