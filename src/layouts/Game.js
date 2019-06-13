@@ -4,6 +4,7 @@ import Target from '../components/Target';
 import Info from '../components/Info';
 import ButtonStart from '../components/ButtonStart';
 import ButtonStop from '../components/ButtonStop';
+import Lost from '../components/Lost';
 import { deleteTargetRequested } from '../actions/targets';
 import { gameStartRequested, gameStopRequested } from '../actions/game';
 
@@ -49,7 +50,7 @@ const GameLayout = ({ isStarted, isLost, lives, score, targets, dispatch }) => (
           })
         }
       </React.Fragment>
-    ) : (<div>You lost!</div>)) : (
+    ) : (<Lost restartGame={() => dispatch(gameStopRequested())}/>)) : (
       <React.Fragment>
         <ButtonStart onClick={() => dispatch(gameStartRequested())} />
       </React.Fragment>
