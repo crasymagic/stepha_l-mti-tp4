@@ -3,18 +3,23 @@ import { connect } from 'react-redux';
 import Target from '../components/Target';
 import Info from '../components/Info';
 import ButtonStart from '../components/ButtonStart';
+import ButtonStop from '../components/ButtonStop';
 import { deleteTargetRequested } from '../actions/targets';
-import { gameStartRequested } from '../actions/game';
+import { gameStartRequested, gameStopRequested } from '../actions/game';
 
 // FIXME: maybe, do something about this ?
-const mapStateToProps = state => ({
-  lives: state.game.lives,
-  score: state.game.score,
-  isStarted: state.game.isStarted, 
-  targets: state.game.targets
-});
+  const mapStateToProps = state => {
+    console.log(state);
+    return {
+      lives: state.targets.lives,
+      score: state.targets.score,
+      isStarted: state.game.isStarted,
+      isLost: state.targets.isLost, 
+      targets: state.targets.targets
+    }
+};
 
-const GameLayout = ({ isStarted, lives, score, targets, dispatch }) => (
+const GameLayout = ({ isStarted, isLost, lives, score, targets, dispatch }) => (
   <div
     style={{
       position: 'fixed',
@@ -28,14 +33,15 @@ const GameLayout = ({ isStarted, lives, score, targets, dispatch }) => (
       margin: 'auto'
     }}
   >
-    {isStarted ? (
+    {isStarted ? (!isLost ? (
       <React.Fragment>
+        <ButtonStop onClick={() => dispatch(gameStopRequested())}></ButtonStop>
         <Info lives={lives} score={score} />
         {
-          targets.map((target) => {
+          targets.map((target, index) => {
             return (
               <Target
-                key={target.id}
+                key={index}
                 {...target}
                 onDeleteTarget={() => dispatch(deleteTargetRequested(target.id))}
               />
@@ -43,7 +49,7 @@ const GameLayout = ({ isStarted, lives, score, targets, dispatch }) => (
           })
         }
       </React.Fragment>
-    ) : (
+    ) : (<div>You lost!</div>)) : (
       <React.Fragment>
         <ButtonStart onClick={() => dispatch(gameStartRequested())} />
       </React.Fragment>

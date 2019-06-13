@@ -9,7 +9,8 @@ const Info = ({ lives, score }) => (
       right: '10px',
       backgroundColor: 'white',
       borderRadius: '10px',
-      textAlign: 'right'
+      textAlign: 'right',
+      zIndex: 10000
     }}
   >
     <div>{lives} <span role="img" aria-label="heart">❤️</span></div>

@@ -1,17 +1,16 @@
-import {
-    combineReducers
-} from 'redux';
+import { combineReducers } from 'redux';
 
 const defaultState = {
     lives: 3,
     score: 0,
     isStarted: false,
+    isLost: false,
     targets: [{
         id: 0,
         timeout: 5,
         location: {
-            x: Math.floor(Math.random() * window.innerWidth) + 1,
-            y: Math.floor(Math.random() * window.innerHeight) + 1
+            x: Math.floor(Math.random() * (window.innerWidth - 50)) + 50,
+            y: Math.floor(Math.random() * (window.innerHeight - 50)) + 50
         }
     }]
 };
@@ -19,10 +18,15 @@ const defaultState = {
 export const game = (state = defaultState, action) => {
     switch (action.type) {
         case 'GAME_START':
-            console.log('GAME_START');
             return {
                 ...state,
                 isStarted: true
+            };
+        case 'GAME_STOP':
+            window.location.reload();
+            return {
+                ...state,
+                isStarted: false
             };
         default:
             return state;
@@ -32,7 +36,6 @@ export const game = (state = defaultState, action) => {
 export const targets = (state = defaultState, action) => {
     switch (action.type) {
         case 'ADD_TARGET':
-            console.log('ADD_TARGET');
             return Object.assign({},
                 state, {
                     targets: [
@@ -41,22 +44,39 @@ export const targets = (state = defaultState, action) => {
                             id: action.target.id,
                             timeout: action.target.timeout,
                             location: {
-                                x: Math.floor(Math.random() * window.innerWidth) + 1,
-                                y: Math.floor(Math.random() * window.innerHeight) + 1
+                                x: Math.floor(Math.random() * (window.innerWidth - 50)) + 50,
+                                y: Math.floor(Math.random() * (window.innerHeight - 50)) + 50
                             }
                         }
                     ]
                 }
             );
-        case 'UPDATE_TARGET':
-            console.log('UPDATE_TARGET');
-            return Object.assign({},
-                state, {
-                    targets: state.targets.map((t) => t.timeout--)
+        case 'UPDATE_TARGETS_TIMEOUT':
+            if (state.targets.filter((t) => t.timeout === 1).length > 0) {
+                if (state.lives <= 1) {
+                    return Object.assign({}, 
+                        state, {
+                            targets: state.targets.map((t) => Object.assign({}, t, { timeout: t.timeout - 1 })).filter((t) => t.timeout > 0),
+                            lives: state.lives - 1,
+                            isLost: true
+                        }
+                    );
+                } else {
+                    return Object.assign({}, 
+                        state, {
+                            targets: state.targets.map((t) => Object.assign({}, t, { timeout: t.timeout - 1 })).filter((t) => t.timeout > 0),
+                            lives: state.lives - 1
+                        }
+                    );
                 }
-            );
+            } else {
+                return Object.assign({},
+                    state, {
+                        targets: state.targets.map((t) => Object.assign({}, t, { timeout: t.timeout - 1 }))
+                    }
+                );
+            }
         case 'DELETE_TARGET':
-            console.log('DELETE_TARGET', state, action);
             return Object.assign({},
                 state, {
                     score: state.score + 1,
