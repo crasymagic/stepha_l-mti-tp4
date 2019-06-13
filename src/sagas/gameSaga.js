@@ -1,5 +1,6 @@
 import { take, put } from 'redux-saga/effects';
 import { gameStart, GAME_START_REQUESTED } from '../actions/game';
+import { DELETE_TARGET_REQUESTED } from '../actions/targets';
 
 export function* gameSaga() {
     while (true) {
@@ -9,6 +10,8 @@ export function* gameSaga() {
 }
 
 export function* targetClickedSaga() {
-    yield take('TARGET_CLICKED_REQUESTED');
-    console.log('clicked');
+    while (true) {
+        const payload = yield take(DELETE_TARGET_REQUESTED);
+        console.log(payload);
+    }
 }

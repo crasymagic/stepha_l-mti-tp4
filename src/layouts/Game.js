@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Target from '../components/Target';
 import Info from '../components/Info';
 import ButtonStart from '../components/ButtonStart';
-import { deleteTarget } from '../actions/targets';
+import { deleteTargetRequested } from '../actions/targets';
+import { gameStartRequested } from '../actions/game';
 
 // FIXME: maybe, do something about this ?
 const mapStateToProps = state => ({
@@ -36,16 +37,15 @@ const GameLayout = ({ isStarted, lives, score, targets, dispatch }) => (
               <Target
                 key={target.id}
                 {...target}
-                onClick={() => dispatch(deleteTarget(target.id))}
+                onDeleteTarget={() => dispatch(deleteTargetRequested(target.id))}
               />
             );
           })
-          
         }
       </React.Fragment>
     ) : (
       <React.Fragment>
-        <ButtonStart onClick={() => dispatch({ type: 'GAME_START_REQUESTED' })} />
+        <ButtonStart onClick={() => dispatch(gameStartRequested())} />
       </React.Fragment>
     )}
   </div>

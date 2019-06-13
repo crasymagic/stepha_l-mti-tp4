@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Target = ({ x = 0, y = 0, timeout = 0, onClick = () => {} }) => (
+const Target = ({ location = { x: 0, y: 0 }, timeout = 0, onDeleteTarget = () => {} }) => (
   <div
     style={{
       position: 'absolute',
-      top: `${y}px`,
-      left: `${x}px`,
+      top: `${location.y}px`,
+      left: `${location.x}px`,
       width: '25px',
       height: '25px',
       textAlign: 'center',
@@ -14,7 +14,7 @@ const Target = ({ x = 0, y = 0, timeout = 0, onClick = () => {} }) => (
       backgroundColor: '#FFD065',
       borderRadius: '8rem'
     }}
-    onClick={onClick}
+    onClick={() => onDeleteTarget()}
   >
     {timeout}
   </div>
