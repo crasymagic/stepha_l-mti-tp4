@@ -5,20 +5,22 @@ import Info from '../components/Info';
 import ButtonStart from '../components/ButtonStart';
 import ButtonStop from '../components/ButtonStop';
 import Lost from '../components/Lost';
+import LevelSelector from '../components/LevelSelector';
 import { deleteTargetRequested } from '../actions/targets';
-import { gameStartRequested, gameStopRequested } from '../actions/game';
+import { gameStartRequested, gameStopRequested, changeLevelRequested } from '../actions/game';
 
 const mapStateToProps = state => {
   return {
     lives: state.targets.lives,
     score: state.targets.score,
     isStarted: state.game.isStarted,
+    globalTimeoutLevel: state.game.globalTimeoutLevel,
     isLost: state.targets.isLost, 
     targets: state.targets.targets
   }
 };
 
-const GameLayout = ({ isStarted, isLost, lives, score, targets, dispatch }) => (
+const GameLayout = ({ isStarted, isLost, globalTimeoutLevel, lives, score, targets, dispatch }) => (
   <div
     id="gamecanvas"
     style={{
@@ -52,7 +54,8 @@ const GameLayout = ({ isStarted, isLost, lives, score, targets, dispatch }) => (
       </React.Fragment>
     ) : (<Lost restartGame={() => dispatch(gameStopRequested())}/>)) : (
       <React.Fragment>
-        <ButtonStart onClick={() => dispatch(gameStartRequested())} />
+        <LevelSelector onChangeValue={(event) => dispatch(changeLevelRequested(event.target.value))}/>
+        <ButtonStart onClick={() => dispatch(gameStartRequested(globalTimeoutLevel))} />
       </React.Fragment>
     )}
   </div>

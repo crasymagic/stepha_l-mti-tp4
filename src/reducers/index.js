@@ -5,6 +5,7 @@ const defaultState = {
     score: 0,
     isStarted: false,
     isLost: false,
+    globalTimeoutLevel: 1000,
     targets: []
 };
 
@@ -21,6 +22,11 @@ export const game = (state = defaultState, action) => {
                 ...state,
                 isStarted: false
             };
+        case 'CHANGE_LEVEL':
+            return {
+                ...state,
+                globalTimeoutLevel: parseInt(action.newGlobalTimeoutLevel, 10)
+            }
         default:
             return state;
     }
