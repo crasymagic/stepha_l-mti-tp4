@@ -52,19 +52,20 @@ export const targets = (state = defaultState, action) => {
             );
         case 'UPDATE_TARGETS_TIMEOUT':
             if (state.targets.filter((t) => t.timeout === 1).length > 0) {
-                if (state.lives <= 1) {
+                const nbTargetsDying = state.targets.filter((t) => t.timeout <= 1).length;
+                if (state.lives <= nbTargetsDying) {
                     return Object.assign({}, 
                         state, {
+                            lives: state.lives - nbTargetsDying,
                             targets: state.targets.map((t) => Object.assign({}, t, { timeout: t.timeout - 1 })).filter((t) => t.timeout > 0),
-                            lives: state.lives - 1,
                             isLost: true
                         }
                     );
                 } else {
                     return Object.assign({}, 
                         state, {
+                            lives: state.lives - nbTargetsDying,
                             targets: state.targets.map((t) => Object.assign({}, t, { timeout: t.timeout - 1 })).filter((t) => t.timeout > 0),
-                            lives: state.lives - 1
                         }
                     );
                 }

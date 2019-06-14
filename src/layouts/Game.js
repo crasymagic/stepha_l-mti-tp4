@@ -46,7 +46,7 @@ const GameLayout = ({ isStarted, isLost, globalTimeoutLevel, lives, score, targe
                 key={index}
                 id={index}
                 {...target}
-                onDeleteTarget={() => dispatch(deleteTargetRequested(target.id))}
+                onDeleteTarget={() => dispatch(deleteTargetRequested(target.id, score))}
               />
             );
           })

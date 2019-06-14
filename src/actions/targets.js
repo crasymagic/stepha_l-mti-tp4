@@ -8,7 +8,7 @@ let nextTargetId = 0;
 
 export const addTarget = (timeout, location) => ({ type: ADD_TARGET, target: { id: nextTargetId++, timeout: timeout, location: location}});
 
-export const deleteTargetRequested = (id) => ({ type: DELETE_TARGET_REQUESTED, target: { id: id }});
+export const deleteTargetRequested = (id, currentScore) => ({ type: DELETE_TARGET_REQUESTED, target: { id: id }, currentScore: currentScore});
 export const deleteTarget = (id) => ({ type: DELETE_TARGET, target: { id: id }});
 
 // export const updateTargetsTimeoutRequested = () => ({ type: UPDATE_TARGETS_TIMEOUT_REQUESTED });
