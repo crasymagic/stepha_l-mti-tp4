@@ -1,16 +1,19 @@
-date: sometimes before 22/12/2018 23:59.
-subject: [MTI][js] tps <InsertLoginHere>
+date: 14/06/2019.
+subject: [MTI][js] tps stepha_l
 body:
 
-Hello, my name is <InsertFirstname> <InsertLastname>,
+Hello, my name is Léo Stephan,
 
 here are the git repositories to my projects:
 
-- tp5: <InsertGitAddressToTP5>
-- tp6: <InsertGitAddressToTP6>
-- tp7: <InsertGitAddressToTP7>
+- tp1: https://github.com/crasymagic/stepha_l-mti-tp1
+- tp2: https://github.com/crasymagic/stepha_l-mti-tp2
+- tp3: https://github.com/crasymagic/stepha_l-mti-tp3
+- tp4: https://github.com/crasymagic/stepha_l-mti-tp4
 
-<InsertPolitenessHere>
+Best regards,
 
 --
-<InsertSignatureHere>
+Léo Stephan (stepha_l)
+MTI 2020
+3IE
